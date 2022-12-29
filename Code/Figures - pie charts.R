@@ -91,7 +91,7 @@ g4 + g3
 
 ###############################################################
 
-safe <- rev(turbo(7))
+safe <- rev(turbo(6))
 
 worm %>% separate_rows(Diagnostics, sep=',') %>%
   select(Diagnostics) %>% na.omit() %>% table() %>% data.frame() %>%
