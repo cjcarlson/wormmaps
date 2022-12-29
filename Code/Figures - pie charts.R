@@ -3,9 +3,9 @@ library(tidyverse)
 library(scales)
 library(patchwork)
 
-safe <-  c("#88CCEE", "#CC6677", "#DDCC77", "#117733", "#332288", "#AA4499", 
-                    "#44AA99", "#999933", "#882255", "#661100", "#6699CC", "#888888")
-
+safe <- rev(turbo(12))
+tiny <- rev(plasma(3))
+  
 blank_theme <- theme_minimal()+
   theme(
     axis.title.x = element_blank(),
@@ -49,13 +49,16 @@ worm %>% separate_rows(Vector, sep=', ') %>%
   coord_polar('y',start=0, direction=-1) + 
   blank_theme +
   theme(axis.text.x=element_blank()) +
-  scale_fill_manual(values = safe) -> g2 #+ -
+  scale_fill_manual(values = tiny) -> g2 #+ -
 
 g1 + g2
 #ggsave('Vectors.pdf')
 
 
 #############################################################
+
+safe <- rev(turbo(7))
+tiny <- rev(mako(5))
 
 worm %>% separate_rows(`SpatialScale`, sep=', ') %>% 
   select(`SpatialScale`) %>% table() %>% data.frame() %>%
@@ -70,7 +73,7 @@ worm %>% separate_rows(`SpatialScale`, sep=', ') %>%
   coord_polar('y',start=0, direction=-1) + 
   blank_theme +
   theme(axis.text.x=element_blank()) +
-  scale_fill_manual(values = safe) -> g3
+  scale_fill_manual(values = tiny) -> g3
 #ggsave('Scales.pdf')
 
 worm %>% separate_rows(`Methodology`, sep=',') %>% 
@@ -87,6 +90,8 @@ worm %>% separate_rows(`Methodology`, sep=',') %>%
 g4 + g3
 
 ###############################################################
+
+safe <- rev(turbo(7))
 
 worm %>% separate_rows(Diagnostics, sep=',') %>%
   select(Diagnostics) %>% na.omit() %>% table() %>% data.frame() %>%
